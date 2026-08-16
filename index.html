@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iran FTTH | ارائه دهنده اینترنت پرسرعت فیبر نوری</title>
+    <!-- فونت استاندارد وزیرمتن -->
+    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/Vazirmatn-font-face.css" rel="stylesheet" type="text/css" />
+    <style>
+        /* تعریف متغیرهای رنگی برای دو حالت لایت و دارک */
+        :root {
+            --bg-color: #f8f9fa;
+            --text-main: #333333;
+            --text-muted: #555555;
+            --header-bg: #0f2c59;
+            --header-text: #ffffff;
+            --accent-color: #dac0a3;
+            --accent-hover: #eadbc8;
+            --btn-header-text: #0f2c59;
+            --btn-primary: #007bff;
+            --btn-primary-hover: #0056b3;
+            --card-bg: #ffffff;
+            --card-border: #eeeeee;
+            --feature-bg: #f8f9fa;
+            --feature-border: #e9ecef;
+            --badge-bg: #e8f4fd;
+            --badge-border: #b8daff;
+            --badge-text: #0f2c59;
+            --input-bg: #ffffff;
+            --input-border: #cccccc;
+            --footer-bg: #222222;
+            --footer-text: #aaaaaa;
+            --footer-heading: #ffffff;
+            --hero-bg1: rgba(15, 44, 89, 0.85);
+            --hero-bg2: rgba(15, 44, 89, 0.85);
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #0b1120;
+            --text-main: #e2e8f0;
+            --text-muted: #94a3b8;
+            --header-bg: rgba(11, 17, 32, 0.95);
+            --header-text: #cbd5e1;
+            --accent-color: #8b5cf6;
+            --accent-hover: #7c3aed;
+            --btn-header-text: #ffffff;
+            --btn-primary: #8b5cf6;
+            --btn-primary-hover: #7c3aed;
+            --card-bg: #111827;
+            --card-border: #1f2937;
+            --feature-bg: rgba(30, 41, 59, 0.5);
+            --feature-border: #334155;
+            --badge-bg: rgba(139, 92, 246, 0.1);
+            --badge-border: #8b5cf6;
+            --badge-text: #c4b5fd;
+            --input-bg: #0f172a;
+            --input-border: #334155;
+            --footer-bg: #020617;
+            --footer-text: #94a3b8;
+            --footer-heading: #ffffff;
+            --hero-bg1: rgba(11, 17, 32, 0.9);
+            --hero-bg2: rgba(15, 23, 42, 0.95);
+        }
+
+        /* تنظیمات پایه */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Vazirmatn', sans-serif;
+        }
+        
+        body, header, .product-showcase, .feature-box, .form-container, .tehran-badge, input, select, textarea, footer {
+            transition: background-color 0.4s ease, color 0.4s ease, border-color 0.4s ease;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+        }
+        a {
+            text-decoration: none;
+        }
+
+        /* هدر و منو */
+        header {
+            background-color: var(--header-bg);
+            color: var(--header-text);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+        }
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: 900;
+            color: var(--accent-color);
+            letter-spacing: 1px;
+        }
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 25px;
+        }
+        .nav-links a {
+            color: var(--header-text);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+        
+        /* دکمه‌های هدر (تم و سفارش) */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .theme-toggle-btn {
+            background: none;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .theme-toggle-btn:hover {
+            transform: scale(1.15);
+        }
+        .btn-header {
+            background-color: var(--accent-color);
+            color: var(--btn-header-text);
+            padding: 8px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+        .btn-header:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* بخش هیرو (بنر اصلی) */
+        .hero {
+            background: linear-gradient(var(--hero-bg1), var(--hero-bg2)), url('https://images.unsplash.com/photo-1544197150-b99a580bb7a8?q=80&w=2070&auto=format&fit=crop') center/cover;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+        }
+        .hero h1 {
+            font-size: 40px;
+            margin-bottom: 15px;
+            color: #fff;
+        }
+        .hero h1 span {
+            color: var(--accent-color);
+        }
+        .hero p {
+            font-size: 18px;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            color: #e2e8f0;
+        }
+        .btn-primary {
+            background-color: var(--btn-primary);
+            color: white;
+            padding: 12px 30px;
+            font-size: 18px;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            display: inline-block;
+        }
+        .btn-primary:hover {
+            background-color: var(--btn-primary-hover);
+            transform: translateY(-2px);
+        }
+
+        /* عناوین بخش‌ها */
+        .section-title {
+            text-align: center;
+            margin: 60px 0 30px;
+            font-size: 28px;
+            color: var(--text-main);
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--btn-primary);
+            margin: 10px auto 0;
+        }
+
+        /* بخش معرفی محصول */
+        .product-showcase {
+            background: var(--card-bg);
+            border-radius: 8px;
+            padding: 40px;
+            margin-bottom: 50px;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
+        }
+        .product-brand {
+            font-size: 14px;
+            color: var(--btn-primary);
+            letter-spacing: 1px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+        .product-image {
+            max-width: 100%;
+            width: 400px;
+            border-radius: 8px;
+            margin: 20px auto;
+            display: block;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .product-title {
+            font-size: 32px;
+            color: var(--text-main);
+            margin-bottom: 20px;
+        }
+        .product-title span {
+            color: var(--accent-color);
+        }
+        .product-desc {
+            font-size: 18px;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 40px;
+            line-height: 1.8;
+        }
+        
+        /* فیچرها */
+        .features-grid {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .feature-box {
+            background: var(--feature-bg);
+            border: 1px solid var(--feature-border);
+            border-radius: 8px;
+            padding: 20px 30px;
+            transition: transform 0.3s, box-shadow 0.3s;
+            min-width: 180px;
+        }
+        .feature-box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .feature-icon {
+            font-size: 35px;
+            color: var(--btn-primary);
+            margin-bottom: 10px;
+        }
+        .feature-title {
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--text-main);
+        }
+
+        .tehran-badge {
+            background: var(--badge-bg);
+            border: 1px solid var(--badge-border);
+            color: var(--badge-text);
+            padding: 15px 25px;
+            border-radius: 8px;
+            display: inline-block;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+
+        /* فرم ثبت نام اینترنت */
+        .registration-section {
+            background-color: var(--bg-color);
+            padding: 50px 0;
+            border-top: 1px solid var(--card-border);
+        }
+        .form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            border: 1px solid var(--card-border);
+        }
+        .form-row {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .form-group label {
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+        .form-group input, .form-group select, .form-group textarea {
+            padding: 12px;
+            background: var(--input-bg);
+            border: 1px solid var(--input-border);
+            color: var(--text-main);
+            border-radius: 5px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            outline: none;
+            border-color: var(--btn-primary);
+        }
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+        .btn-submit {
+            width: 100%;
+            background-color: var(--btn-primary);
+            color: white;
+            padding: 15px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+        .btn-submit:hover {
+            background-color: var(--btn-primary-hover);
+        }
+
+        /* فوتر */
+        footer {
+            background-color: var(--footer-bg);
+            color: var(--footer-text);
+            padding: 50px 0 20px;
+            margin-top: 50px;
+        }
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
+        }
+        .footer-col h3 {
+            color: var(--footer-heading);
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+        .footer-col ul {
+            list-style: none;
+        }
+        .footer-col ul li {
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .footer-col ul a {
+            color: var(--footer-text);
+            transition: color 0.3s;
+        }
+        .footer-col ul a:hover {
+            color: var(--footer-heading);
+        }
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 14px;
+            color: var(--footer-text);
+        }
+
+        /* واکنش‌گرایی (Responsive) */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .form-row {
+                flex-direction: column;
+                gap: 0;
+            }
+            .hero h1 {
+                font-size: 28px;
+            }
+            .product-image {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- هدر سایت -->
+    <header>
+        <div class="container navbar">
+            <div class="logo">IRAN FTTH</div>
+            <ul class="nav-links">
+                <li><a href="#">صفحه اصلی</a></li>
+                <li><a href="#product">مودم SANDLIGHT</a></li>
+                <li><a href="#register">ثبت‌نام (استان تهران)</a></li>
+                <li><a href="#">تماس با ما</a></li>
+            </ul>
+            <div class="header-actions">
+                <button id="theme-toggle" class="theme-toggle-btn" title="تغییر پوسته">🌙</button>
+                <a href="#register" class="btn-header">سفارش سریع</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- بنر اصلی -->
+    <section class="hero">
+        <div class="container">
+            <h1>تجربه <span>پایین‌ترین پینگ</span> با اینترنت فیبر نوری</h1>
+            <p>سریع‌ترین و پایدارترین سرویس اینترنت کشور، ویژه گیمرها، استریمرها و سازمان‌های حرفه‌ای.</p>
+            <a href="#register" class="btn-primary">همین حالا سفارش دهید</a>
+        </div>
+    </section>
+
+    <!-- بخش معرفی محصول اختصاصی -->
+    <main class="container" id="product" style="margin-top: 60px;">
+        <div class="product-showcase">
+            <div class="product-brand">SANDLIGHT | مودم فیبر نوری نسل جدید | SA8457V</div>
+            
+            <!-- تصویر مودم -->
+            <img src="https://plain-eeur-prod-public.komododecks.com/202608/16/SzIoAvLCKLBhjy3dc6TO/image.jpg" alt="مودم SANDLIGHT مدل SA8457V" class="product-image">
+
+            <h2 class="product-title">سرعتی که <span>واقعاً</span> حسش می‌کنید</h2>
+            <p class="product-desc">با ۴ آنتن قدرتمند و تکنولوژی واقعی FTTH، هر گوشه‌ی خانه یا محل کارتان به یک نقطه‌ی پرسرعت بدون مرز تبدیل می‌شود.</p>
+            
+            <div class="features-grid">
+                <div class="feature-box">
+                    <div class="feature-icon">📡</div>
+                    <div class="feature-title">پوشش گسترده</div>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-title">سرعت گیگابیتی</div>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">🛡️</div>
+                    <div class="feature-title">اتصال پایدار</div>
+                </div>
+                <div class="feature-box">
+                    <div class="feature-icon">🔧</div>
+                    <div class="feature-title">نصب آسان</div>
+                </div>
+            </div>
+
+            <div class="tehran-badge">
+                📍 راه‌اندازی اینترنت و تلفن بدون نیاز به کانفیگ — <strong>ویژه استان تهران</strong>
+            </div>
+            
+            <br>
+            <a href="#register" class="btn-primary">همین حالا سفارش دهید</a>
+        </div>
+    </main>
+
+    <!-- بخش ثبت نام -->
+    <section class="registration-section" id="register">
+        <div class="container">
+            <h2 class="section-title">فرم ثبت درخواست سرویس (ویژه استان تهران)</h2>
+            <div class="form-container">
+                <form action="#" method="POST">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="fname">نام و نام خانوادگی:</label>
+                            <input type="text" id="fname" placeholder="مثال: علی محمدی" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="national_id">کد ملی:</label>
+                            <input type="text" id="national_id" placeholder="کد ملی ۱۰ رقمی" required>
+                        </div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="phone">شماره موبایل:</label>
+                            <input type="tel" id="phone" placeholder="09xxxxxxxxx" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="city">شهر (استان تهران):</label>
+                            <select id="city" required>
+                                <option value="tehran">شهر تهران</option>
+                                <option value="rey">شهر ری</option>
+                                <option value="shemiranat">شمیرانات</option>
+                                <option value="pardis">پردیس</option>
+                                <option value="islamshahr">اسلامشهر</option>
+                                <option value="other">سایر شهرهای استان تهران</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="address">آدرس دقیق پستی در استان تهران:</label>
+                        <textarea id="address" placeholder="نام محله، خیابان، کوچه، پلاک و واحد را دقیق وارد کنید..." required></textarea>
+                    </div>
+
+                    <div class="form-group" style="flex-direction: row; align-items: center; gap: 10px; margin-bottom: 20px;">
+                        <input type="checkbox" id="gaming" style="width: auto;">
+                        <label for="gaming" style="margin-bottom: 0; color: var(--text-main);">متقاضی سرویس ویژه با پایین‌ترین پینگ هستم.</label>
+                    </div>
+
+                    <button type="submit" class="btn-submit">ثبت درخواست و بررسی پوشش‌دهی</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- فوتر سایت -->
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>درباره IRAN FTTH</h3>
+                    <p style="font-size: 14px;">ارائه‌دهنده تخصصی اینترنت فیبر نوری و مودم‌های نسل جدید در استان تهران. با ما مرزهای سرعت را پشت سر بگذارید.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>ارتباط با ما</h3>
+                    <ul>
+                        <li>📞 واتس‌اپ: <span dir="ltr">0910 600 10 95</span></li>
+                        <li>📸 اینستاگرام: <a href="https://instagram.com/iran.ftth" dir="ltr">@iran.ftth</a></li>
+                        <li>📍 مناطق تحت پوشش: سراسر استان تهران</li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>لینک‌های سریع</h3>
+                    <ul>
+                        <li><a href="#">خرید حجم اضافه</a></li>
+                        <li><a href="#">تعرفه‌های اینترنت</a></li>
+                        <li><a href="#">تست سرعت (Speed Test)</a></li>
+                        <li><a href="#">قوانین و مقررات</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>تمامی حقوق این وب‌سایت متعلق به شرکت IRAN FTTH می‌باشد. © ۲۰۲۶</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- اسکریپت تغییر تم -->
+    <script>
+        const themeToggleBtn = document.getElementById('theme-toggle');
+        const htmlElement = document.documentElement;
+
+        // بررسی تم ذخیره شده در مرورگر یا تم پیش‌فرض سیستم
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme) {
+            htmlElement.setAttribute('data-theme', savedTheme);
+            updateIcon(savedTheme);
+        } else if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            htmlElement.setAttribute('data-theme', 'dark');
+            updateIcon('dark');
+        }
+
+        // عملکرد دکمه تغییر تم
+        themeToggleBtn.addEventListener('click', () => {
+            let currentTheme = htmlElement.getAttribute('data-theme');
+            let newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            htmlElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateIcon(newTheme);
+        });
+
+        // بروزرسانی آیکون ماه و خورشید
+        function updateIcon(theme) {
+            if (theme === 'dark') {
+                themeToggleBtn.innerHTML = '☀️'; // خورشید (برای برگشت به حالت لایت)
+            } else {
+                themeToggleBtn.innerHTML = '🌙'; // ماه (برای رفتن به حالت دارک)
+            }
+        }
+    </script>
+</body>
+</html>
