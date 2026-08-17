@@ -9,24 +9,29 @@
     <style>
         /* Apple-like Theme Variables */
         :root {
+            /* Light Mode - Enhanced to be more vibrant */
             --bg-base: #ffffff;
-            --bg-secondary: #f5f5f7;
+            --bg-secondary: #f2f2f7; 
             --text-main: #1d1d1f;
             --text-muted: #86868b;
-            --nav-bg: rgba(255, 255, 255, 0.7);
-            --nav-border: rgba(0, 0, 0, 0.16);
+            --nav-bg: rgba(255, 255, 255, 0.85);
+            --nav-border: rgba(0, 0, 0, 0.08);
             --btn-primary: #0071e3;
             --btn-primary-hover: #0077ed;
             --btn-text: #ffffff;
             --card-bg: #ffffff;
-            --card-shadow: 0 4px 24px rgba(0,0,0,0.06);
-            --input-bg: rgba(0,0,0,0.02);
+            --card-shadow: 0 10px 40px rgba(0,0,0,0.08); 
+            --input-bg: #f5f5f7;
             --input-border: #d2d2d7;
             --feature-icon: #0071e3;
             --price-color: #1d1d1f;
+            --hero-gradient: radial-gradient(circle at 50% 0%, rgba(255, 107, 0, 0.08) 0%, rgba(0, 113, 227, 0.04) 40%, transparent 70%); 
+            --card-border: 1px solid rgba(0,0,0,0.04);
+            --check-color: #0071e3;
         }
 
         [data-theme="dark"] {
+            /* Dark Mode (Apple Pro Style) */
             --bg-base: #000000;
             --bg-secondary: #1d1d1f;
             --text-main: #f5f5f7;
@@ -42,6 +47,9 @@
             --input-border: #424245;
             --feature-icon: #ffffff;
             --price-color: #f5f5f7;
+            --hero-gradient: radial-gradient(circle at 50% 0%, rgba(255, 107, 0, 0.15) 0%, transparent 60%);
+            --card-border: 1px solid transparent;
+            --check-color: #ffffff;
         }
 
         /* Reset & Base Settings */
@@ -171,13 +179,13 @@
             padding: 120px 20px 80px;
             position: relative;
         }
-        /* پس زمینه جذاب مشابه سایت های ارتباطاتی مدرن */
         .hero-bg {
             position: absolute;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: radial-gradient(circle at 50% 0%, rgba(255, 107, 0, 0.15) 0%, transparent 60%);
+            background: var(--hero-gradient);
             z-index: -1;
             pointer-events: none;
+            transition: background 0.5s ease;
         }
         .hero-subtitle {
             font-size: 24px;
@@ -236,7 +244,7 @@
             transform: scale(1.02); 
         }
 
-        /* بخش معرفی شبکه با عکس پس‌زمینه (استایل سیسکو/ارتباطات) */
+        /* Network Section */
         .network-section {
             position: relative;
             padding: 150px 20px;
@@ -267,7 +275,7 @@
             color: #d2d2d7;
         }
 
-        /* Features */
+        /* Features Section */
         .features-section {
             background-color: var(--bg-secondary);
             padding: 120px 20px;
@@ -286,6 +294,7 @@
         }
         .feature-box {
             background: var(--card-bg);
+            border: var(--card-border);
             border-radius: 24px;
             padding: 0;
             box-shadow: var(--card-shadow);
@@ -314,7 +323,7 @@
         }
 
         /* =========================================
-           BUY PAGE STYLES (Apple Checkout Style)
+           BUY PAGE STYLES
            ========================================= */
         .local-nav {
             position: sticky;
@@ -327,6 +336,7 @@
             height: 52px;
             display: flex;
             align-items: center;
+            transition: background-color 0.5s ease;
         }
         .local-nav-content {
             display: flex;
@@ -342,10 +352,6 @@
             font-size: 14px;
             color: var(--text-muted);
             margin-left: 15px;
-        }
-        .local-actions {
-            display: flex;
-            align-items: center;
         }
 
         .buy-layout {
@@ -383,7 +389,8 @@
             font-weight: 400;
         }
 
-        .option-card {
+        /* Checkbox Option Cards (Multi-select) */
+        .option-card-multi {
             border: 2px solid var(--input-border);
             border-radius: 16px;
             padding: 24px;
@@ -391,29 +398,79 @@
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
             background: var(--card-bg);
+            gap: 15px;
         }
-        .option-card:hover {
+        .option-card-multi:hover {
             border-color: var(--text-muted);
         }
-        .option-card.selected {
+        .option-card-multi.selected {
             border-color: var(--btn-primary);
             box-shadow: 0 0 0 1px var(--btn-primary);
+        }
+        /* Custom Checkbox Design inside Option Card */
+        .custom-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--input-border);
+            border-radius: 50%; /* Circle like Apple's */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 2px;
+            transition: all 0.2s;
+            flex-shrink: 0;
+        }
+        .option-card-multi.selected .custom-checkbox {
+            border-color: var(--check-color);
+            background-color: var(--check-color);
+        }
+        .custom-checkbox::after {
+            content: "✓";
+            color: var(--bg-base);
+            font-size: 14px;
+            display: none;
+        }
+        .option-card-multi.selected .custom-checkbox::after {
+            display: block;
+        }
+
+        .option-content {
+            flex: 1;
         }
         .option-title {
             font-size: 18px;
             font-weight: 600;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .option-price {
+            font-size: 16px;
+            color: var(--text-main);
+            font-weight: 500;
         }
         .option-desc {
             font-size: 14px;
             color: var(--text-muted);
-            margin-top: 5px;
+            margin-top: 8px;
+            line-height: 1.6;
+        }
+        .option-badge {
+            display: inline-block;
+            background: rgba(255, 107, 0, 0.1);
+            color: #ff6b00;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 8px;
         }
 
         .checkout-form {
             background: var(--card-bg);
+            border: var(--card-border);
             padding: 40px;
             border-radius: 24px;
             box-shadow: var(--card-shadow);
@@ -467,6 +524,22 @@
             border: none;
             border-top: 1px solid var(--input-border);
             margin: 40px 0;
+        }
+
+        /* Total Price Section */
+        .total-price-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-top: 1px solid var(--input-border);
+            margin-top: 30px;
+            font-size: 20px;
+            font-weight: 600;
+        }
+        #total-amount {
+            color: var(--btn-primary);
+            font-size: 24px;
         }
 
         /* Footer */
@@ -535,7 +608,7 @@
                     <h1>پایین‌ترین پینگ<br>بی‌نهایت سرعت</h1>
                 </div>
                 <div class="reveal delay-1">
-                    <p>مودم فیبر نوری SANDLIGHT. طراحی شده برای اتصال بدون محدودیت.</p>
+                    <p>مودم فیبر نوری SANDLIGHT، طراحی شده برای اتصال بدون محدودیت</p>
                     <a href="#buy" class="btn-primary" style="font-size: 21px; padding: 18px 40px;">سفارش دهید</a>
                 </div>
                 
@@ -545,23 +618,22 @@
             </div>
         </section>
 
-        <!-- بخش تصویر فول اسکرین شبکه (الهام از Cisco/Sisconet) -->
+        <!-- بخش تصویر فول اسکرین شبکه -->
         <section class="network-section">
             <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=2034&auto=format&fit=crop" alt="Network Server Room" class="network-bg">
             <div class="container network-content">
-                <h2 class="reveal">قدرت گرفته از زیرساخت‌های استاندارد جهانی.</h2>
-                <p class="reveal delay-1">تکنولوژی Fiber To The Home ما، با تکیه بر استانداردهای ارتباطی و پروتکل‌های پیشرفته صنعتی، پایداری مطلق را به خانه شما می‌آورد.</p>
+                <h2 class="reveal">قدرت گرفته از زیرساخت‌های استاندارد جهانی</h2>
+                <p class="reveal delay-1">تکنولوژی Fiber To The Home ما، با تکیه بر استانداردهای ارتباطی و پروتکل‌های پیشرفته صنعتی، پایداری مطلق را به خانه شما می‌آورد</p>
             </div>
         </section>
 
-        <!-- بخش ویژگی‌ها با ترکیب عکس و متن (الهام از سایت‌های شرکتی) -->
+        <!-- بخش ویژگی‌ها -->
         <section class="features-section">
             <div class="container">
-                <h2 class="reveal">فراتر از یک مودم خانگی.</h2>
+                <h2 class="reveal">فراتر از یک مودم خانگی</h2>
                 <div class="features-grid">
                     
                     <div class="feature-box reveal">
-                        <!-- تصویر مرتبط با گیمینگ / سرعت -->
                         <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=2070&auto=format&fit=crop" alt="Gaming Setup" class="feature-img">
                         <div class="feature-content-inner">
                             <div class="feature-title">سرعت گیگابیتی بدون مرز</div>
@@ -572,7 +644,6 @@
                     </div>
 
                     <div class="feature-box reveal delay-1">
-                        <!-- تصویر مرتبط با پوشش شبکه / وای فای -->
                         <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2070&auto=format&fit=crop" alt="Cyber Security" class="feature-img">
                         <div class="feature-content-inner">
                             <div class="feature-title">اتصال پایدار و امن</div>
@@ -591,19 +662,19 @@
          صفحه دوم: صفحه خرید محصول (Buy Page)
          ============================================== -->
     <div id="page-buy" class="page">
-        <!-- نوار محلی خرید (Local Nav) شبیه اپل -->
+        <!-- نوار محلی خرید (Local Nav) -->
         <div class="local-nav">
             <div class="container local-nav-content">
-                <div class="local-title">SANDLIGHT SA8457V</div>
+                <div class="local-title">ثبت سفارش</div>
                 <div class="local-actions">
-                    <span class="local-price">از ۲,۴۵۰,۰۰۰ تومان</span>
+                    <span class="local-price" id="nav-total-price">۰ تومان</span>
                 </div>
             </div>
         </div>
 
         <div class="container">
             <div class="buy-layout">
-                <!-- ستون تصویر (چسبیده هنگام اسکرول) -->
+                <!-- ستون تصویر -->
                 <div class="buy-image-col reveal">
                     <img src="https://plain-eeur-prod-public.komododecks.com/202608/16/SzIoAvLCKLBhjy3dc6TO/image.jpg" alt="مودم SANDLIGHT">
                 </div>
@@ -611,28 +682,39 @@
                 <!-- ستون انتخاب و فرم -->
                 <div class="buy-form-col reveal delay-1">
                     
-                    <h3 class="buy-step-title">۱. نوع سرویس خود را انتخاب کنید. <span>پینگ مورد نیاز خود را مشخص کنید.</span></h3>
+                    <h3 class="buy-step-title">۱. انتخاب موارد سفارش <span>می‌توانید یک یا هر دو مورد را انتخاب کنید</span></h3>
                     
-                    <div class="option-card selected" onclick="selectOption(this)">
-                        <div>
-                            <div class="option-title">پکیج پرو (ویژه گیمینگ)</div>
-                            <div class="option-desc">پایین‌ترین پینگ ممکن + تخصیص پهنای باند اختصاصی</div>
+                    <!-- گزینه خرید مودم -->
+                    <div class="option-card-multi selected" data-price="2450000" onclick="toggleOption(this)">
+                        <div class="custom-checkbox"></div>
+                        <div class="option-content">
+                            <div class="option-title">
+                                خرید مودم SANDLIGHT SA8457V
+                                <span class="option-price">۲,۴۵۰,۰۰۰ تومان</span>
+                            </div>
+                            <div class="option-desc">نسل جدید مودم‌های فیبر نوری با ۴ آنتن قدرتمند و پورت‌های گیگابیتی.</div>
                         </div>
                     </div>
 
-                    <div class="option-card" onclick="selectOption(this)">
-                        <div>
-                            <div class="option-title">پکیج استاندارد</div>
-                            <div class="option-desc">سرعت بالای دانلود مناسب برای مصارف خانگی و استریم فیلم</div>
+                    <!-- گزینه خرید سرویس اینترنت -->
+                    <div class="option-card-multi selected" data-price="500000" onclick="toggleOption(this)">
+                        <div class="custom-checkbox"></div>
+                        <div class="option-content">
+                            <div class="option-title">
+                                سرویس اینترنت فیبر نوری FTTH
+                                <span class="option-price">از ۵۰۰,۰۰۰ تومان</span>
+                            </div>
+                            <div class="option-desc">پایین‌ترین پینگ و بالاترین پایداری برای استریم و گیمینگ.</div>
+                            <div class="option-badge">ویژه شهر تهران</div>
                         </div>
                     </div>
 
                     <hr>
 
-                    <h3 class="buy-step-title">۲. اطلاعات متقاضی <span>این سرویس فعلاً فقط در استان تهران قابل ارائه است.</span></h3>
+                    <h3 class="buy-step-title">۲. اطلاعات متقاضی <span>لطفاً اطلاعات هویتی و آدرس نصب را دقیق وارد کنید</span></h3>
                     
                     <div class="checkout-form">
-                        <form action="#" method="POST">
+                        <form action="#" method="POST" onsubmit="event.preventDefault(); alert('سفارش شما با موفقیت ثبت شد!');">
                             <div class="form-group">
                                 <label for="fname">نام و نام خانوادگی</label>
                                 <input type="text" id="fname" placeholder="مثال: علی محمدی" required>
@@ -652,15 +734,19 @@
                                     <option value="rey">شهر ری</option>
                                     <option value="shemiranat">شمیرانات</option>
                                     <option value="pardis">پردیس</option>
-                                    <option value="islamshahr">اسلامشهر</option>
                                     <option value="other">سایر شهرهای استان تهران</option>
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="address">آدرس دقیق پستی جهت راه‌اندازی</label>
+                                <label for="address">آدرس دقیق پستی جهت ارسال یا راه‌اندازی</label>
                                 <textarea id="address" placeholder="خیابان، کوچه، پلاک، واحد..." required></textarea>
                             </div>
                             
+                            <div class="total-price-section">
+                                <span>مجموع قابل پرداخت:</span>
+                                <span id="total-amount">۲,۹۵۰,۰۰۰ تومان</span>
+                            </div>
+
                             <button type="submit" class="btn-submit-large">تکمیل خرید و ثبت سفارش</button>
                         </form>
                     </div>
@@ -738,11 +824,24 @@
             themeToggleBtn.innerHTML = theme === 'dark' ? '☀️' : '🌙';
         }
 
-        function selectOption(element) {
-            document.querySelectorAll('.option-card').forEach(card => {
-                card.classList.remove('selected');
+        // Logic for Multi-select Options
+        function toggleOption(element) {
+            element.classList.toggle('selected');
+            calculateTotal();
+        }
+
+        function calculateTotal() {
+            let total = 0;
+            document.querySelectorAll('.option-card-multi.selected').forEach(card => {
+                total += parseInt(card.getAttribute('data-price'));
             });
-            element.classList.add('selected');
+            
+            let formattedTotal = total === 0 ? "۰ تومان" : total.toLocaleString('fa-IR') + " تومان";
+            
+            // Update total at the bottom
+            document.getElementById('total-amount').innerText = formattedTotal;
+            // Update total in the nav bar
+            document.getElementById('nav-total-price').innerText = formattedTotal;
         }
     </script>
 </body>
